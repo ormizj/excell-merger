@@ -8,14 +8,14 @@ if (import.meta.client && res.error.value) alert(`Something went wrong, couldn't
 
 const handleMergeExcel = async () => {
     try {
-        await $fetch('/api/excell/merge', {
+        const res = await $fetch('/api/excell/merge', {
             method: 'POST'
         });
+        saveAs(res);
+
     } catch {
         alert('Error merging files');
     }
-
-    saveAs(res);
 }
 
 const handleUploadExcel = async () => {
