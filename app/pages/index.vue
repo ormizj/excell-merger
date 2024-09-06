@@ -1,26 +1,40 @@
 <script setup>
+import { ref } from 'vue'
 import { saveAs } from 'file-saver'
 
+const fileInput = ref(null)
+useFetch(`/api/excell/clear`, { method: 'POST' })
+
 const handleMergeExcel = async () => {
-    const res = await $fetch(`${window.location.protocol}//${window.location.host}/api/excell/merge`, {
+    const res = await $fetch('/api/excell/merge', {
         method: 'POST'
     });
     saveAs(res)
 }
 
 const handleUploadExcel = async () => {
-    await $fetch(`${window.location.protocol}//${window.location.host}/api/excell/upload`, {
-        method: 'POST'
-    });
+    const formData = new FormData()
+    for (let i = 0; i < fileInput.value.files.length; i++) {
+        formData.append('files', fileInput.value.files[i])
+    }
+
+    try {
+        await $fetch('/api/excell/upload', {
+            method: 'POST',
+            body: formData
+        });
+        alert('Files uploaded successfully');
+    } catch (error) {
+        alert('Error uploading files');
+    }
 }
 </script>
 
 <template>
     <div class="main">
         <div class="centered">
-            <button @click="handleUploadExcel">Upload Excel</button>
-            &nbsp;&nbsp;&nbsp;
-            <button @click="handleMergeExcel">Merge Excel</button>
+            <input ref="fileInput" type="file" name="file" webkitdirectory directory @change="handleUploadExcel">
+            <button @click="handleMergeExcel">Merge Excels</button>
         </div>
     </div>
 </template>

@@ -1,7 +1,11 @@
 import ExcelJS from 'exceljs';
 
 export default defineEventHandler(async (event) => {
-	setHeader(event, 'Content-Type', 'application/vnd.ms-excel');
+	setHeader(
+		event,
+		'Content-Type',
+		'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+	);
 	setHeader(event, 'Content-Disposition', 'attachment; filename=Excell.xlsx');
 
 	const workbook = new ExcelJS.Workbook();
