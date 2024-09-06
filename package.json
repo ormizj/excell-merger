@@ -11,6 +11,7 @@
 	},
 	"dependencies": {
 		"exceljs": "^4.4.0",
+		"file-saver": "^2.0.5",
 		"nuxt": "npm:nuxt-nightly@3x",
 		"vue": "latest",
 		"vue-router": "latest"

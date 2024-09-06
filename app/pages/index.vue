@@ -1,8 +1,15 @@
 <script setup>
+import { saveAs } from 'file-saver'
 
-// async functions
 const handleMergeExcel = async () => {
-    await $fetch(`${window.location.protocol}//${window.location.host}/api/excell/merge`, {
+    const res = await $fetch(`${window.location.protocol}//${window.location.host}/api/excell/merge`, {
+        method: 'POST'
+    });
+    saveAs(res)
+}
+
+const handleUploadExcel = async () => {
+    await $fetch(`${window.location.protocol}//${window.location.host}/api/excell/upload`, {
         method: 'POST'
     });
 }
@@ -11,6 +18,8 @@ const handleMergeExcel = async () => {
 <template>
     <div class="main">
         <div class="centered">
+            <button @click="handleUploadExcel">Upload Excel</button>
+            &nbsp;&nbsp;&nbsp;
             <button @click="handleMergeExcel">Merge Excel</button>
         </div>
     </div>

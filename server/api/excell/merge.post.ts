@@ -1,6 +1,9 @@
 import ExcelJS from 'exceljs';
 
 export default defineEventHandler(async (event) => {
+	setHeader(event, 'Content-Type', 'application/vnd.ms-excel');
+	setHeader(event, 'Content-Disposition', 'attachment; filename=Excell.xlsx');
+
 	const workbook = new ExcelJS.Workbook();
 	const worksheet = workbook.addWorksheet('Excell');
 	worksheet.columns = [
@@ -20,5 +23,5 @@ export default defineEventHandler(async (event) => {
 		dob: new Date(1965, 1, 7),
 	});
 
-	await workbook.xlsx.writeFile('server/output/Excell.xlsx');
+	return await workbook.xlsx.writeBuffer();
 });
