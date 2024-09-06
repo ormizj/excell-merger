@@ -1,5 +1,24 @@
-export default defineEventHandler(async (event) => {
-	const body = await readBody(event);
+import ExcelJS from 'exceljs';
 
-	return `Test POST handler ${JSON.stringify(body)}`;
+export default defineEventHandler(async (event) => {
+	const workbook = new ExcelJS.Workbook();
+	const worksheet = workbook.addWorksheet('Excell');
+	worksheet.columns = [
+		{ header: 'Id', key: 'id', width: 10 },
+		{ header: 'Name', key: 'name', width: 10 },
+		{ header: 'D.O.B.', key: 'DOB', width: 10, outlineLevel: 1 },
+	];
+
+	worksheet.insertRow(1, {
+		id: 1,
+		name: 'John Doe',
+		dob: new Date(1970, 1, 1),
+	});
+	worksheet.insertRow(1, {
+		id: 2,
+		name: 'Jane Doe',
+		dob: new Date(1965, 1, 7),
+	});
+
+	await workbook.xlsx.writeFile('server/output/Excell.xlsx');
 });
