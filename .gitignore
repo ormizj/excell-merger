@@ -6,9 +6,6 @@
 .cache
 dist
 
-#electron
-excell-merger*
-
 # temp data
 uploads
 
