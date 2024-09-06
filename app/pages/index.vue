@@ -2,14 +2,20 @@
 import { ref } from 'vue'
 import { saveAs } from 'file-saver'
 
-const fileInput = ref(null)
-useFetch(`/api/excell/clear`, { method: 'POST' })
+const fileInput = ref(null);
+const res = await useFetch(`/api/excell/clear`, { method: 'POST' });
+if (import.meta.client && res.error.value) alert(`Something went wrong, couldn't clear previously uploaded files, reinstall the application`);
 
 const handleMergeExcel = async () => {
-    const res = await $fetch('/api/excell/merge', {
-        method: 'POST'
-    });
-    saveAs(res)
+    try {
+        await $fetch('/api/excell/merge', {
+            method: 'POST'
+        });
+    } catch {
+        alert('Error merging files');
+    }
+
+    saveAs(res);
 }
 
 const handleUploadExcel = async () => {
@@ -23,8 +29,7 @@ const handleUploadExcel = async () => {
             method: 'POST',
             body: formData
         });
-        alert('Files uploaded successfully');
-    } catch (error) {
+    } catch {
         alert('Error uploading files');
     }
 }
@@ -33,8 +38,12 @@ const handleUploadExcel = async () => {
 <template>
     <div class="main">
         <div class="centered">
-            <input ref="fileInput" type="file" name="file" webkitdirectory directory @change="handleUploadExcel">
-            <button @click="handleMergeExcel">Merge Excels</button>
+            <h3>Upload a folders containing ".xls/x" files and then press "Merge Excels"</h3>
+            <br>
+            <div>
+                <input ref="fileInput" type="file" name="file" webkitdirectory directory @change="handleUploadExcel">
+                <button @click="handleMergeExcel">Merge Excels</button>
+            </div>
         </div>
     </div>
 </template>
@@ -52,6 +61,7 @@ const handleUploadExcel = async () => {
 .centered {
     height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     color: white;
