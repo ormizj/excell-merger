@@ -13,15 +13,15 @@ export default defineEventHandler(async (event) => {
 	worksheet.columns = [
 		{ header: 'Id', key: 'id', width: 10 },
 		{ header: 'Name', key: 'name', width: 10 },
-		{ header: 'D.O.B.', key: 'DOB', width: 10, outlineLevel: 1 },
+		{ header: 'D.O.B.', key: 'dob', width: 10, outlineLevel: 1 },
 	];
 
-	worksheet.insertRow(1, {
+	worksheet.addRow({
 		id: 1,
 		name: 'John Doe',
 		dob: new Date(1970, 1, 1),
 	});
-	worksheet.insertRow(1, {
+	worksheet.addRow({
 		id: 2,
 		name: 'Jane Doe',
 		dob: new Date(1965, 1, 7),
