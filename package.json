@@ -10,7 +10,7 @@
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare",
 		"main": "dist-electron/main.js",
-		"build-electron": "electron-packager dist-electron excell-merger --platform=win32 --arch=x64"
+		"exe": "electron-packager dist-electron excell-merger --platform=win32 --arch=x64"
 	},
 	"dependencies": {
 		"exceljs": "^4.4.0",
