@@ -6,9 +6,6 @@
 .cache
 dist
 
-# Excel folder directory
-server/resources
-
 # Node dependencies
 node_modules
 
