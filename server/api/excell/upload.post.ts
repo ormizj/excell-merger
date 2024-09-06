@@ -14,5 +14,5 @@ export default defineEventHandler(async (event) => {
 		await fs.writeFile(filePath, file.data);
 	}
 
-	return;
+	return 'Files uploaded successfully';
 });

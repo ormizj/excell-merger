@@ -5,11 +5,8 @@ import path from 'path';
 export default defineEventHandler(async (event) => {
 	const uploadDir = path.join(process.cwd(), 'uploads');
 
-	const files = await fs.readdir(uploadDir);
+	await fs.rm(uploadDir, { recursive: true, force: true });
+	await fs.mkdir(uploadDir, { recursive: true });
 
-	for (const file of files) {
-		await fs.unlink(path.join(uploadDir, file));
-	}
-
-	return;
+	return 'Files cleared successfully';
 });
