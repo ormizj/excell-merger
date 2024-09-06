@@ -38,7 +38,7 @@ export default [
         },
     },
     {
-        files: ['pages/*.vue', 'layouts/*.vue'],
+        files: ['app/pages/*.vue', 'app/layouts/*.vue'],
         rules: {
             'vue/multi-word-component-names': 'off',
         },
