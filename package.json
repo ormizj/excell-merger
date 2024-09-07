@@ -3,7 +3,7 @@
 	"private": false,
 	"type": "module",
 	"main": "dist-electron/main.js",
-	"productName": "Excel merger app",
+	"productName": "Excel Merger",
 	"version": "0.0.1",
 	"scripts": {
 		"start": "npm install && nuxt dev",
